@@ -1,0 +1,14 @@
+# Enable mutipart uploads
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 250MB
+      # \u7F13\u5B58\u6587\u4EF6\u5B58\u653E\u5730\u5740
+      location: E:\data\applogs
+
+
+#\u6587\u4EF6\u4E0A\u4F20\u8DEF\u5F84
+file.upload-dir: E:\data

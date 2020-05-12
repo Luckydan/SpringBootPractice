@@ -16,4 +16,5 @@ mybatis:
 
 logging:
   level:
+    # 日志中打印sql
     com.luckydan.springbootssm.mapper: debug

@@ -1,0 +1,19 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/sakila?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+  #设置空如何序列化,如果不想给前端返回null字段。就可以将ALWAYS改为NON_NULL，如果连空字符都不想返回则改为NOT_EMPTY即可
+  #jackson:
+   # default-property-inclusion: non_null
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.luckydan.springbootssm.bean
+
+logging:
+  level:
+    com.luckydan.springbootssm.mapper: debug

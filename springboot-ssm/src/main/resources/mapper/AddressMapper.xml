@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.luckydan.springbootssm.mapper.AddressMapper">
+    <resultMap id="Address" type="com.luckydan.springbootssm.bean.Address">
+        <result column="address_id" property="addressId" javaType="int"/>
+        <result column="address" property="address" javaType="String"  />
+        <result column="address2" property="address2" javaType="String"/>
+        <result column="district" property="district" javaType="String"/>
+        <result column="city_id"  property="cityId" javaType="int"/>
+        <result column="postal_code" property="postalCode" javaType="String"/>
+        <result column="phone" property="phone" javaType="String"/>
+        <result column="last_update" property="lastUpdate" javaType="Date"/>
+    </resultMap>
+
+    <select id="getAddressById" resultMap="Address">
+        select * from address where address_id=#{1}
+    </select>
+
+    <select id="getAddressByids" resultMap="Address">
+        select ${fields} from address where ${fieldName} ${compare}
+        <foreach item="item" index="index" collection="ids"
+            open ="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getAddressByCustomerCondition" parameterType="com.luckydan.springbootssm.basic.SearchFilterInfo" resultMap="Address">
+        select * from address where ${fieldName} ${compare} #{fieldValue}
+    </select>
+
+    <select id="getGoupbyField" resultType="map">
+        select ${field} name,count(1)value from address group by ${field}
+    </select>
+
+    <select id="getAddressCustomeFieldsByCustomerCondition"  resultMap="Address">
+        select ${fields} from address where ${fieldName} ${compare} #{fieldValue}
+    </select>
+</mapper>

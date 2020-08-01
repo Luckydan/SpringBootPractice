@@ -2,6 +2,8 @@ package com.luckydan.springbootssm.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.luckydan.springbootssm.basic.BaseApiService;
 import com.luckydan.springbootssm.basic.BaseResponse;
 import com.luckydan.springbootssm.basic.SearchFilterInfo;
@@ -78,6 +80,18 @@ public class AddressController extends BaseApiService<Address> {
     public String getGroupByField(String field){
         List<Map<String, Object>> goupbyField = addressMapper.getGoupbyField(field);
         return JSON.toJSONString(goupbyField);
+    }
+
+    @ResponseBody
+    @RequestMapping("/getAddressByPage")
+    public BaseResponse<Address> getAddressByPage(Long page,Long perPage,Integer city_id){
+        Page<Address> objectPage = new Page<Address>();
+        objectPage.setCurrent(page);
+        objectPage.setSize(perPage);
+
+        IPage<Map<String, Object>> addressByPage = addressMapper.getAddressByPage(objectPage, city_id);
+        System.out.println(addressByPage);
+        return null;
     }
 
 }

@@ -36,4 +36,8 @@
     <select id="getAddressCustomeFieldsByCustomerCondition"  resultMap="Address">
         select ${fields} from address where ${fieldName} ${compare} #{fieldValue}
     </select>
+
+    <select id="getAddressByPage" resultType="Address">
+        select * from address where city_id > #{city_id}
+    </select>
 </mapper>

@@ -1,8 +1,11 @@
 package com.luckydan.springbootssm.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.luckydan.springbootssm.basic.SearchFilterInfo;
 import com.luckydan.springbootssm.basic.SearchParams;
 import com.luckydan.springbootssm.bean.Address;
+import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,4 +61,11 @@ public interface AddressMapper {
      */
     public List<Address> getAddressCustomeFieldsByCustomerCondition(String fields,String fieldName,String compare,String fieldValue);
 
+    /**
+     * 通过city_id 进行分页查询
+     * @param page
+     * @param city_id
+     * @return
+     */
+    public IPage getAddressByPage(Page page, Integer city_id);
 }

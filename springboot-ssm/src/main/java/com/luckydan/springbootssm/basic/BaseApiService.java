@@ -4,6 +4,7 @@ import com.luckydan.springbootssm.constants.Constants;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class BaseApiService<T> {
@@ -48,6 +49,11 @@ public class BaseApiService<T> {
 	// 通用封装
 	public BaseResponse<T> setResult(Integer code, String msg, T data) {
 		return new BaseResponse<T>(code, msg, data);
+	}
+
+	//通过Pagehelper分页，对分页结果数据进行封装
+	public BaseResponse<Map<String,Object>> setResultPage(Integer code, String msg, Map<String,Object> data) {
+		return new BaseResponse<Map<String,Object>>(code, msg, data);
 	}
 
 	/**

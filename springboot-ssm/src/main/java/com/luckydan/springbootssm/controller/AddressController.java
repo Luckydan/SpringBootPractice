@@ -1,25 +1,22 @@
 package com.luckydan.springbootssm.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.luckydan.springbootssm.basic.BaseApiService;
 import com.luckydan.springbootssm.basic.BaseResponse;
 import com.luckydan.springbootssm.basic.SearchFilterInfo;
 import com.luckydan.springbootssm.basic.SearchParams;
 import com.luckydan.springbootssm.bean.Address;
 import com.luckydan.springbootssm.mapper.AddressMapper;
+import com.luckydan.springbootssm.utils.PageBeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.codec.AbstractDataBufferDecoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Title:
@@ -84,14 +81,24 @@ public class AddressController extends BaseApiService<Address> {
 
     @ResponseBody
     @RequestMapping("/getAddressByPage")
-    public BaseResponse<Address> getAddressByPage(Long page,Long perPage,Integer city_id){
-        Page<Address> objectPage = new Page<Address>();
-        objectPage.setCurrent(page);
-        objectPage.setSize(perPage);
+    public BaseResponse<Map<String,Object>> getAddressByPage(Integer page,Integer perPage, Long city_id){
+        // 开启分页，传入参数
+        PageBeanUtil pageBeanUtil = new PageBeanUtil(page,perPage);
+        PageHelper.startPage(pageBeanUtil);
 
-        IPage<Map<String, Object>> addressByPage = addressMapper.getAddressByPage(objectPage, city_id);
-        System.out.println(addressByPage);
-        return null;
+        // 获取数据
+        List<Address> addressByPage = addressMapper.getAddressPage(city_id);
+
+        // 用PageInfo对结果进行包装
+        PageInfo<Address> addressPageInfo = new PageInfo<>(addressByPage);
+
+        // 构建结果数据
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("total", addressPageInfo.getTotal());
+        map.put("ddressList", addressPageInfo.getList());
+
+        System.out.println(addressPageInfo);
+        return setResultPage(200,"success",map);
     }
 
 }

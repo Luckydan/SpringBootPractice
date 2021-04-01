@@ -1,6 +1,4 @@
 package com.luckydan.springbootssm.bean;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +23,4 @@ public class Address {
 	private String phone;
 
 	private java.util.Date lastUpdate;
-
-
 }

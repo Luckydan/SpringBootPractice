@@ -20,7 +20,7 @@
     <select id="getAddressByids" resultMap="Address">
         select ${fields} from address where ${fieldName} ${compare}
         <foreach item="item" index="index" collection="ids"
-            open ="(" separator="," close=")">
+                 open ="(" separator="," close=")">
             #{item}
         </foreach>
     </select>
@@ -37,7 +37,8 @@
         select ${fields} from address where ${fieldName} ${compare} #{fieldValue}
     </select>
 
-    <select id="getAddressByPage" resultType="Address">
+    <select id="getAddressPage" resultType="Address">
         select * from address where city_id > #{city_id}
     </select>
+
 </mapper>

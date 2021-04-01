@@ -11,10 +11,13 @@ spring:
     default-property-inclusion: non_null
 
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.luckydan.springbootssm.bean
+      mapper-locations: classpath:mapper/*.xml
+      type-aliases-package: com.luckydan.springbootssm.bean
 
 logging:
   level:
     # 日志中打印sql
     com.luckydan.springbootssm.mapper: debug
+pagehelper:
+  reasonable: true
+  auto-dialect: true

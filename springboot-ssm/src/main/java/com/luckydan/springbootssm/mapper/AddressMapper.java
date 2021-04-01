@@ -1,11 +1,9 @@
 package com.luckydan.springbootssm.mapper;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.luckydan.springbootssm.basic.SearchFilterInfo;
-import com.luckydan.springbootssm.basic.SearchParams;
 import com.luckydan.springbootssm.bean.Address;
-import org.omg.PortableInterceptor.INACTIVE;
+import com.luckydan.springbootssm.utils.PageBeanUtil;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,5 +65,6 @@ public interface AddressMapper {
      * @param city_id
      * @return
      */
-    public IPage getAddressByPage(Page page, Integer city_id);
+    public List<Address> getAddressPage(@Param("city_id") Long city_id);
+
 }
